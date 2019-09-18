@@ -43,6 +43,18 @@
       "name": "Reducer API",
       "earnings": "999",
       "description": "Api"
+    },
+    {
+      "id": "e5fa1835-6349-480f-8f9b-4a4a728bf959",
+      "name": "Tibor",
+      "earnings": "1111",
+      "description": "Actions API Challenge"
+    },
+    {
+      "id": "ba461d4f-b45e-4f99-b285-bc7116f2ece9",
+      "name": "Store Book",
+      "earnings": "0998",
+      "description": "Book created in the state"
     }
   ]
 }
