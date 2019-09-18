@@ -13,5 +13,12 @@
       "earnings": 50000000
     }
   ],
-  "books": []
+  "books": [
+    {
+      "id": "9a76cf73-5571-408b-9b9b-2be090750f0a",
+      "name": "Tibor",
+      "earnings": "124",
+      "description": "Tibors Book"
+    }
+  ]
 }

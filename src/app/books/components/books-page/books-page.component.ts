@@ -1,10 +1,14 @@
 import { Component, OnInit } from "@angular/core";
+import { Store } from '@ngrx/store';
+
 import {
   BookModel,
   calculateBooksGrossEarnings,
   BookRequiredProps
 } from "src/app/shared/models/book.model";
 import { BooksService } from "src/app/shared/services/book.service";
+import { State } from '../../../shared/state';
+import { BooksPageActions } from '../../actions';
 
 @Component({
   selector: "app-books",
@@ -16,9 +20,14 @@ export class BooksPageComponent implements OnInit {
   currentBook: BookModel | null = null;
   total: number = 0;
 
-  constructor(private booksService: BooksService) {}
+  constructor(
+    private booksService: BooksService,
+    private _store: Store<State>
+  ) {}
 
   ngOnInit() {
+    this._store.dispatch(BooksPageActions.enter());
+    
     this.getBooks();
     this.removeSelectedBook();
   }
@@ -36,13 +45,16 @@ export class BooksPageComponent implements OnInit {
 
   onSelect(book: BookModel) {
     this.currentBook = book;
+    this._store.dispatch(BooksPageActions.selectBook({ bookId: book.id }))
   }
 
   onCancel() {
     this.removeSelectedBook();
   }
-
+  
   removeSelectedBook() {
+    this._store.dispatch(BooksPageActions.clearSelectedBook());
+
     this.currentBook = null;
   }
 
@@ -55,6 +67,7 @@ export class BooksPageComponent implements OnInit {
   }
 
   saveBook(bookProps: BookRequiredProps) {
+    this._store.dispatch(BooksPageActions.createBook({ book: bookProps }));
     this.booksService.create(bookProps).subscribe(() => {
       this.getBooks();
       this.removeSelectedBook();
@@ -62,6 +75,8 @@ export class BooksPageComponent implements OnInit {
   }
 
   updateBook(book: BookModel) {
+    this._store.dispatch(BooksPageActions.updateBook({ bookId: book.id, book: book }));
+
     this.booksService.update(book.id, book).subscribe(() => {
       this.getBooks();
       this.removeSelectedBook();
@@ -69,6 +84,8 @@ export class BooksPageComponent implements OnInit {
   }
 
   onDelete(book: BookModel) {
+    this._store.dispatch(BooksPageActions.deleteBook({ bookId: book.id}));
+
     this.booksService.delete(book.id).subscribe(() => {
       this.getBooks();
       this.removeSelectedBook();
