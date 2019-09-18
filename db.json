@@ -15,16 +15,34 @@
   ],
   "books": [
     {
-      "id": "9a76cf73-5571-408b-9b9b-2be090750f0a",
-      "name": "Tibor",
-      "earnings": "124",
-      "description": "Tibors Book"
+      "id": "1f6f9d18-cdf8-42d2-b4f9-6cd3bfa473c1",
+      "name": "Reducer API",
+      "earnings": "999",
+      "description": "Api"
     },
     {
-      "id": "6defc1de-96e7-41d2-9038-61f2270b5b7f",
-      "name": "New Tibor",
-      "earnings": "456",
-      "description": "Actions API Challenge"
+      "id": "9299e341-ccc8-4f51-a57f-631cf2c9d958",
+      "name": "Reducer API",
+      "earnings": "999",
+      "description": "Api"
+    },
+    {
+      "id": "291dcd65-0a5b-4831-909f-07d69b6f171d",
+      "name": "Reducer API",
+      "earnings": "999",
+      "description": "Api"
+    },
+    {
+      "id": "d604aace-69f1-47f2-8861-a77a2d798331",
+      "name": "Reducer API",
+      "earnings": "999",
+      "description": "Api"
+    },
+    {
+      "id": "6b0ac3bb-6f89-4102-8159-c5f723cf196c",
+      "name": "Reducer API",
+      "earnings": "999",
+      "description": "Api"
     }
   ]
 }
