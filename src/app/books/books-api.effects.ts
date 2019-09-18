@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Effect, Actions, ofType } from "@ngrx/effects";
-import { mergeMap, map } from "rxjs/operators";
+import { mergeMap, map, concatMap, exhaustMap } from "rxjs/operators";
 import { BooksService } from "../shared/services/book.service";
 import { BooksPageActions, BooksApiActions } from "./actions";
 
@@ -9,12 +9,43 @@ export class BooksApiEffects {
   @Effect()
   loadBooks$ = this.actions$.pipe(
     ofType(BooksPageActions.enter),
-    mergeMap(() =>
+    exhaustMap(() =>
       this.booksService
         .all()
         .pipe(map(books => BooksApiActions.booksLoaded({ books })))
     )
   );
+
+  @Effect()
+  createBook$ = this.actions$.pipe(
+    ofType(BooksPageActions.createBook),
+    mergeMap(action =>
+      this.booksService
+        .create(action.book)
+        .pipe(map(book => BooksApiActions.bookCreated({ book })))
+    )
+  );
+
+  @Effect()
+  updateBook$ = this.actions$.pipe(
+    ofType(BooksPageActions.updateBook),
+    concatMap(action =>
+      this.booksService
+        .update(action.bookId, action.book)
+        .pipe(map(book => BooksApiActions.bookUpdated({ book })))
+    )
+  );
+
+  @Effect()
+  deleteBook$ = this.actions$.pipe(
+    ofType(BooksPageActions.deleteBook),
+    exhaustMap(action =>
+      this.booksService
+        .delete(action.bookId)
+        .pipe(map(() => BooksApiActions.bookDeleted({ bookId: action.bookId })))
+    )
+  );
+
 
   constructor(private booksService: BooksService, private actions$: Actions) {}
 }

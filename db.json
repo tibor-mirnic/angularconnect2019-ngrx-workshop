@@ -15,22 +15,10 @@
   ],
   "books": [
     {
-      "id": "e5fa1835-6349-480f-8f9b-4a4a728bf959",
+      "id": "4bd58f9d-4e74-4855-b505-917da428c793",
       "name": "Tibor",
-      "earnings": "1111",
-      "description": "Actions API Challenge"
-    },
-    {
-      "id": "ba461d4f-b45e-4f99-b285-bc7116f2ece9",
-      "name": "Store Book",
-      "earnings": "0998",
-      "description": "Book created in the state"
-    },
-    {
-      "id": "deb5e414-ccea-4e31-8b24-bea047e5784e",
-      "name": "Tibor",
-      "earnings": "5555",
-      "description": "Tibors Book"
+      "earnings": "211",
+      "description": null
     }
   ]
 }

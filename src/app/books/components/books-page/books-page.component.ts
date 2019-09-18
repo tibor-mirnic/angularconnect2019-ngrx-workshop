@@ -6,9 +6,8 @@ import {
   BookModel,
   BookRequiredProps
 } from "src/app/shared/models/book.model";
-import { BooksService } from "src/app/shared/services/book.service";
 import { State, selectAllBooks, selectActiveBook, selectBooksEarningsTotals } from '../../../shared/state';
-import { BooksPageActions, BooksApiActions } from '../../actions';
+import { BooksPageActions } from '../../actions';
 
 @Component({
   selector: "app-books",
@@ -21,7 +20,6 @@ export class BooksPageComponent implements OnInit {
   total$: Observable<number>;
 
   constructor(
-    private booksService: BooksService,
     private _store: Store<State>
   ) {
     this.books$ = this._store.select(selectAllBooks);
@@ -43,33 +41,13 @@ export class BooksPageComponent implements OnInit {
   
   onSave(book: BookRequiredProps | BookModel) {
     if ("id" in book) {
-      this.updateBook(book);
+      this._store.dispatch(BooksPageActions.updateBook({ bookId: book.id, book: book }));
     } else {
-      this.saveBook(book);
+      this._store.dispatch(BooksPageActions.createBook({ book: book }));
     }
-  }
-
-  saveBook(bookProps: BookRequiredProps) {
-    this._store.dispatch(BooksPageActions.createBook({ book: bookProps }));
-
-    this.booksService.create(bookProps).subscribe(book => {
-      this._store.dispatch(BooksApiActions.bookCreated({ book: book }));
-    });
-  }
-
-  updateBook(book: BookModel) {
-    this._store.dispatch(BooksPageActions.updateBook({ bookId: book.id, book: book }));
-
-    this.booksService.update(book.id, book).subscribe(book => {
-      this._store.dispatch(BooksApiActions.bookUpdated({ book: book }));
-    });
   }
 
   onDelete(book: BookModel) {
     this._store.dispatch(BooksPageActions.deleteBook({ bookId: book.id}));
-
-    this.booksService.delete(book.id).subscribe(() => {
-      this._store.dispatch(BooksApiActions.bookDeleted({ bookId: book.id }));
-    });
   }
 }

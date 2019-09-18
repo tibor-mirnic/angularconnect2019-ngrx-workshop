@@ -26,6 +26,6 @@ export const updateBook = createAction(
 )
 
 export const deleteBook = createAction(
-  '[Books Page] Create Book',
+  '[Books Page] Delete Book',
   props<{ bookId: string }>()
 )

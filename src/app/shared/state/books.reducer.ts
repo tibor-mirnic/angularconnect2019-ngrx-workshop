@@ -62,7 +62,8 @@ export const booksReducer = createReducer(
   on(BooksApiActions.bookDeleted, (state, action) => {
     return {
       ...state,
-      collection: deleteBook(state.collection, action.bookId)
+      collection: deleteBook(state.collection, action.bookId),
+      activeBookId: null
     };
   })
 );
