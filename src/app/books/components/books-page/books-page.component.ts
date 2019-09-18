@@ -8,7 +8,7 @@ import {
 } from "src/app/shared/models/book.model";
 import { BooksService } from "src/app/shared/services/book.service";
 import { State } from '../../../shared/state';
-import { BooksPageActions } from '../../actions';
+import { BooksPageActions, BooksApiActions } from '../../actions';
 
 @Component({
   selector: "app-books",
@@ -27,7 +27,7 @@ export class BooksPageComponent implements OnInit {
 
   ngOnInit() {
     this._store.dispatch(BooksPageActions.enter());
-    
+
     this.getBooks();
     this.removeSelectedBook();
   }
@@ -36,6 +36,7 @@ export class BooksPageComponent implements OnInit {
     this.booksService.all().subscribe(books => {
       this.books = books;
       this.updateTotals(books);
+      this._store.dispatch(BooksApiActions.getAllBooks({ books: books }));
     });
   }
 
@@ -45,7 +46,7 @@ export class BooksPageComponent implements OnInit {
 
   onSelect(book: BookModel) {
     this.currentBook = book;
-    this._store.dispatch(BooksPageActions.selectBook({ bookId: book.id }))
+    this._store.dispatch(BooksPageActions.selectBook({ bookId: book.id }));
   }
 
   onCancel() {
@@ -68,18 +69,22 @@ export class BooksPageComponent implements OnInit {
 
   saveBook(bookProps: BookRequiredProps) {
     this._store.dispatch(BooksPageActions.createBook({ book: bookProps }));
-    this.booksService.create(bookProps).subscribe(() => {
+    this.booksService.create(bookProps).subscribe(book => {
       this.getBooks();
       this.removeSelectedBook();
+
+      this._store.dispatch(BooksApiActions.bookCreated({ book: book }));
     });
   }
 
   updateBook(book: BookModel) {
     this._store.dispatch(BooksPageActions.updateBook({ bookId: book.id, book: book }));
 
-    this.booksService.update(book.id, book).subscribe(() => {
+    this.booksService.update(book.id, book).subscribe(book => {
       this.getBooks();
       this.removeSelectedBook();
+
+      this._store.dispatch(BooksApiActions.bookUpdated({ book: book }));
     });
   }
 
@@ -89,6 +94,8 @@ export class BooksPageComponent implements OnInit {
     this.booksService.delete(book.id).subscribe(() => {
       this.getBooks();
       this.removeSelectedBook();
+
+      this._store.dispatch(BooksApiActions.bookDeleted({ bookId: book.id }));
     });
   }
 }

@@ -19,6 +19,12 @@
       "name": "Tibor",
       "earnings": "124",
       "description": "Tibors Book"
+    },
+    {
+      "id": "6defc1de-96e7-41d2-9038-61f2270b5b7f",
+      "name": "New Tibor",
+      "earnings": "456",
+      "description": "Actions API Challenge"
     }
   ]
 }
