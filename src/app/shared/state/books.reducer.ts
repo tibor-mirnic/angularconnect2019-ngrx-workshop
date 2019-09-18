@@ -38,6 +38,13 @@ export const booksReducer = createReducer(
         activeBookId: action.bookId
       };
   }),
+  on(BooksApiActions.booksLoaded,
+    (state, action) => {
+      return {
+        ...state,
+        collection: action.books
+      };
+  }),
   on(BooksApiActions.bookCreated, (state, action) => {
     return {
       ...state,

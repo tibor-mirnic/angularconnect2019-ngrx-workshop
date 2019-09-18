@@ -15,36 +15,6 @@
   ],
   "books": [
     {
-      "id": "1f6f9d18-cdf8-42d2-b4f9-6cd3bfa473c1",
-      "name": "Reducer API",
-      "earnings": "999",
-      "description": "Api"
-    },
-    {
-      "id": "9299e341-ccc8-4f51-a57f-631cf2c9d958",
-      "name": "Reducer API",
-      "earnings": "999",
-      "description": "Api"
-    },
-    {
-      "id": "291dcd65-0a5b-4831-909f-07d69b6f171d",
-      "name": "Reducer API",
-      "earnings": "999",
-      "description": "Api"
-    },
-    {
-      "id": "d604aace-69f1-47f2-8861-a77a2d798331",
-      "name": "Reducer API",
-      "earnings": "999",
-      "description": "Api"
-    },
-    {
-      "id": "6b0ac3bb-6f89-4102-8159-c5f723cf196c",
-      "name": "Reducer API",
-      "earnings": "999",
-      "description": "Api"
-    },
-    {
       "id": "e5fa1835-6349-480f-8f9b-4a4a728bf959",
       "name": "Tibor",
       "earnings": "1111",
@@ -55,6 +25,12 @@
       "name": "Store Book",
       "earnings": "0998",
       "description": "Book created in the state"
+    },
+    {
+      "id": "deb5e414-ccea-4e31-8b24-bea047e5784e",
+      "name": "Tibor",
+      "earnings": "5555",
+      "description": "Tibors Book"
     }
   ]
 }

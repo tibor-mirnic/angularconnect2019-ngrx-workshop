@@ -31,13 +31,6 @@ export class BooksPageComponent implements OnInit {
 
   ngOnInit() {
     this._store.dispatch(BooksPageActions.enter());
-    this.getBooks();
-  }
-
-  getBooks() {
-    this.booksService.all().subscribe(books => {
-      this._store.dispatch(BooksApiActions.getAllBooks({ books: books }));
-    });
   }
 
   onSelect(book: BookModel) {
@@ -58,7 +51,7 @@ export class BooksPageComponent implements OnInit {
 
   saveBook(bookProps: BookRequiredProps) {
     this._store.dispatch(BooksPageActions.createBook({ book: bookProps }));
-    
+
     this.booksService.create(bookProps).subscribe(book => {
       this._store.dispatch(BooksApiActions.bookCreated({ book: book }));
     });

@@ -1,8 +1,8 @@
 import { createAction, props } from "@ngrx/store";
 import { BookModel } from "src/app/shared/models/book.model";
 
-export const getAllBooks = createAction(
-  "[Books API] Get All Books Success",
+export const booksLoaded = createAction(
+  "[Books API] Books Loaded Success",
   props<{ books: BookModel[] }>()
 );
 
